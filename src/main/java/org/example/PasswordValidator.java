@@ -28,11 +28,9 @@ public class PasswordValidator {
     // öffentliche Methode zur Validierung des eingegebenen Passwortes
     public String validate() {
         if (minEightChars(password) && hasDigit(password) && upperAndLowercase(password) && (passwordMatch(password)) && hasSpecial(password)) {
-            password = "";
             return VALIDE;
         }
         else{
-            password = "";
             return INVALIDE;
         }
     }
@@ -43,18 +41,21 @@ public class PasswordValidator {
         SecureRandom sRandom = new SecureRandom();
         StringBuilder sb = new StringBuilder(length);
         String allChars = ALPHABETUPPER + ALPHABETLOWER + NUMBERS + SPECIAL_CHARACTERS;
+        String output = INVALIDE;
 
         // erzeugt solange Passwörter der übergebenen Länge, bis ein valides Passwort erzeugt wurde
         // und gibt es zurück
-        while(!(!generatedPassword.isEmpty() && !generatedPassword.equals(INVALIDE))) {
+        while(output.equals(INVALIDE)) {
             for (int i = 0; i < length; i++) {
                 int index = sRandom.nextInt(allChars.length());
                 sb.append(allChars.charAt(index));
             }
 
-            generatedPassword = validate(sb.toString());
+            this.password = sb.toString();
+            output = validate();
         }
-        generatedPassword = sb.toString();
+
+        this.generatedPassword = sb.toString();
         return true;
     }
 
@@ -91,14 +92,6 @@ public class PasswordValidator {
         for (String badPassword : badPasswordList)
             return !password.equals(badPassword);
         return true;
-    }
-
-    // private, überladene Methode zur Passwortvalidierung
-    private String validate(String password) {
-        if (minEightChars(password) && hasDigit(password) && upperAndLowercase(password) && (passwordMatch(password)) && hasSpecial(password))
-            return VALIDE;
-        else
-            return INVALIDE;
     }
 
     // gibt das erzeugte Passwort zurück
