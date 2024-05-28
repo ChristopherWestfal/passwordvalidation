@@ -8,12 +8,15 @@ import java.util.Scanner;
 
 public  class Input {
 
+    Scanner sc;
+
     public Input(){
+        sc = new Scanner(System.in);
         choice();
+        sc.close();
     }
 
     private void choice(){
-        Scanner sc = new Scanner(System.in);
         System.out.println("-----------------------------");
         System.out.println("|   Validate password (1)   |");
         System.out.println("|   Generate password (2)   |");
@@ -37,19 +40,15 @@ public  class Input {
     }
 
     private void inputValidatePassword(){
-        Scanner sc = new Scanner(System.in);
         System.out.print("\nPlease enter your password: ");
         String password = sc.nextLine();
 
         PasswordValidator validator = new PasswordValidator(password);
 
         System.out.println(validator.validate());
-
-        sc.close();
     }
 
     private void inputGeneratePassword(){
-        Scanner sc = new Scanner(System.in);
         PasswordValidator generator = new PasswordValidator();
         System.out.print("\nPlease enter a password  length (>= 8): ");
 
@@ -68,7 +67,5 @@ public  class Input {
         catch (Exception e) {
             System.err.println("Invalid input: " + e.getMessage());
         }
-
-        sc.close();
     }
 }
