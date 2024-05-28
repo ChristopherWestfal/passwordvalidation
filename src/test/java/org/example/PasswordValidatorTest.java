@@ -17,6 +17,18 @@ class PasswordValidatorTest {
     }
 
     @Test
+    void validate_shouldReturnFalse_forUnderEightChars() {
+        validator = new PasswordValidator("hall*");
+        assertEquals(expectedInvalid, validator.validate());
+    }
+
+    @Test
+    void validate_shouldReturnFalse_forNoDigits() {
+        validator = new PasswordValidator("hall*welt");
+        assertEquals(expectedInvalid, validator.validate());
+    }
+
+    @Test
     void validate_shouldReturnFalse_forNoUppercase() {
         validator = new PasswordValidator("hall*welt1");
         assertEquals(expectedInvalid, validator.validate());
@@ -41,7 +53,8 @@ class PasswordValidatorTest {
     }
 
     @Test
-    void generatePassword() {
-
+    void generatePassword_shouldReturnTrue_forValidPasswordlength() {
+        validator = new PasswordValidator();
+        assertTrue(validator.generatePassword(8));
     }
 }
