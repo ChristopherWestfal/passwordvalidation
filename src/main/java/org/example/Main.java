@@ -11,6 +11,9 @@ public class Main {
         PasswordValidator validator = new PasswordValidator(password);
 
         System.out.println(validator.validate());
-        System.out.println("\nYour generated password: " + validator.generatePassword());
+
+        System.out.println("\nPlease enter a password  length (>= 8): ");
+        int length = sc.nextInt();
+        System.out.println("Your generated password: " + validator.generatePassword(length));
     }
 }

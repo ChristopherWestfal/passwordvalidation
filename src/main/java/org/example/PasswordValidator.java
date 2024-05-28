@@ -1,8 +1,14 @@
 package org.example;
 
+import java.security.SecureRandom;
+
 public class PasswordValidator {
-    String password;
-    String[] badPasswordList = {"Test123*", "Pa$$wort1"};
+    private final static String ALPHABETUPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private final static String ALPHABETLOWER = "abcdefghijklmnopqrstuvwxyz";
+    private final static String NUMBERS = "0123456789";
+    private final static String SPECIAL_CHARACTERS = "!@#$%^&*()-_=+[]{}|;:',.<>?/~`";
+    private String password;
+    private String[] badPasswordList = {"Test123*", "Pa$$wort1"};
 
     public PasswordValidator(String password) {
         this.password = password;
@@ -15,7 +21,10 @@ public class PasswordValidator {
             return "Your password is invalide";
     }
 
-    public String generatePassword(){
+    public String generatePassword(int Length){
+        SecureRandom sRandom = new SecureRandom();
+        StringBuilder sb = new StringBuilder();
+
         return "Not implemented yet";
     }
 
